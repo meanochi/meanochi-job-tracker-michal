@@ -47,7 +47,8 @@ tests/: 34 בדיקות offline (python -m pytest tests), FakeClient ב-conftest
 - ב-SDK, total_cost_usd מצטבר לאורך הסשן. תוקן ב-SDK/agent.py (הפרש לכל תור), ו-results/sdk.json תוקן בדיעבד (שדה note).
 - Claude Code משתמש ב-cache TTL של שעה ($8 למיליון), וה-API ב-5 דקות ($5 למיליון).
 - בוצע: ההעדפות עברו מה-system prompt לבלוק <memory> בהודעת ה-user הראשונה של כל סשן. ה-system עכשיו סטטי וזהה בכל הסשנים.
-  צריך להריץ שוב את התרחיש של ה-API ולעדכן את REPORT.md (35 בדיקות offline עוברות).
+  שתי הגרסאות הורצו שוב אחרי השינוי (6/6 בשתיהן), ו-REPORT.md עודכן לפי ההרצה הזו.
+- הריפו: https://github.com/meanochi/meanochi-job-tracker-michal
 
 החלטות שלב 6:
 - runner אחד משותף (shared/scenario.py) לשתי הגרסאות: מוחק את runs/<version>/ בהתחלה (מצב נקי),
