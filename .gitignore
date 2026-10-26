@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+.pytest_cache/
+
+# runtime data: local state and per-run scratch directories (results/ is committed)
+data/
+runs/

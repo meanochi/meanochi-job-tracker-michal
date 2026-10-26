@@ -1,0 +1,30 @@
+{
+  "description": "Job tracker: two sessions. Session 2 runs on a new agent instance that only has the disk.",
+  "sessions": [
+    {
+      "name": "session 1",
+      "turns": [
+        "I applied to Wix for a Backend Developer position, and to Monday.com as a Full-Stack Junior.",
+        "Important for the future: I only want hybrid jobs. No fully remote and no full-time office.",
+        "Wix invited me to a first interview!",
+        "I found this job board: https://www.python.org/jobs/ - read it and tell me in one sentence whether it looks relevant for me. Don't add anything."
+      ]
+    },
+    {
+      "name": "session 2",
+      "turns": [
+        "Remind me: what work mode do I want, and where does my Wix application stand?",
+        "Actually, a full-time office job is fine too, not only hybrid. Please update my preference.",
+        "Monday.com rejected me. Which of my applications are still active?"
+      ]
+    }
+  ],
+  "checks": [
+    {"id": "two_applications_no_duplicates", "type": "job_count", "expect": 2},
+    {"id": "wix_status_interview", "type": "job_status", "company": "wix", "expect": "interview"},
+    {"id": "monday_status_rejected", "type": "job_status", "company": "monday", "expect": "rejected"},
+    {"id": "contradiction_overrides_old_preference", "type": "single_work_mode", "must_include": "office"},
+    {"id": "external_tool_used", "type": "tool_called", "turn": 4, "tool": "fetch_job_posting"},
+    {"id": "memory_recalled_in_session_2", "type": "reply_contains", "turn": 5, "all": ["hybrid", "interview"]}
+  ]
+}

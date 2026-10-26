@@ -1,0 +1,193 @@
+{
+  "version": "api",
+  "scenario": "scenario.json",
+  "turns": [
+    {
+      "turn": 1,
+      "session": 1,
+      "prompt": "I applied to Wix for a Backend Developer position, and to Monday.com as a Full-Stack Junior.",
+      "reply": "I added both applications, and they're marked as applied:\n- **Wix**: Backend Developer\n- **Monday.com**: Full-Stack Junior",
+      "input": 6,
+      "cache_read": 1169,
+      "cache_write": 1414,
+      "output": 202,
+      "model_calls": 2,
+      "tools": [
+        "add_application",
+        "add_application"
+      ],
+      "seconds": 3.93,
+      "cost_usd": 0.011368,
+      "cache_hit_pct": 45.2
+    },
+    {
+      "turn": 2,
+      "session": 1,
+      "prompt": "Important for the future: I only want hybrid jobs. No fully remote and no full-time office.",
+      "reply": "Got it. I've saved that you only want hybrid jobs, with no fully remote or full-time office roles. I'll check any new postings you share against this.",
+      "input": 6,
+      "cache_read": 2933,
+      "cache_write": 227,
+      "output": 138,
+      "model_calls": 2,
+      "tools": [
+        "save_preference"
+      ],
+      "seconds": 3.28,
+      "cost_usd": 0.004506,
+      "cache_hit_pct": 92.6
+    },
+    {
+      "turn": 3,
+      "session": 1,
+      "prompt": "Wix invited me to a first interview!",
+      "reply": "Congratulations! 🎉 I've moved Wix (Backend Developer) to the interview stage. Good luck!",
+      "input": 6,
+      "cache_read": 3384,
+      "cache_write": 192,
+      "output": 111,
+      "model_calls": 2,
+      "tools": [
+        "update_status"
+      ],
+      "seconds": 3.21,
+      "cost_usd": 0.003881,
+      "cache_hit_pct": 94.5
+    },
+    {
+      "turn": 4,
+      "session": 1,
+      "prompt": "I found this job board: https://www.python.org/jobs/ - read it and tell me in one sentence whether it looks relevant for me. Don't add anything.",
+      "reply": "Probably not very relevant: most of the listings I could see on this Python job board are fully remote, and the rest are in places like London, Warsaw and Texas, so they don't fit your hybrid-only preference (the page was cut off, so I couldn't check every job).",
+      "input": 6,
+      "cache_read": 3786,
+      "cache_write": 847,
+      "output": 200,
+      "model_calls": 2,
+      "tools": [
+        "fetch_job_posting"
+      ],
+      "seconds": 4.46,
+      "cost_usd": 0.009016,
+      "cache_hit_pct": 81.6
+    },
+    {
+      "turn": 5,
+      "session": 2,
+      "prompt": "Remind me: what work mode do I want, and where does my Wix application stand?",
+      "reply": "You're looking for **hybrid only**: no fully remote jobs and no full-time office jobs.\n\nYour **Wix** application for Backend Developer is at the **interview** stage.",
+      "input": 4,
+      "cache_read": 0,
+      "cache_write": 1197,
+      "output": 88,
+      "model_calls": 1,
+      "tools": [],
+      "seconds": 1.73,
+      "cost_usd": 0.007761,
+      "cache_hit_pct": 0.0
+    },
+    {
+      "turn": 6,
+      "session": 2,
+      "prompt": "Actually, a full-time office job is fine too, not only hybrid. Please update my preference.",
+      "reply": "I've updated your preference to **hybrid or full-time office**. I kept fully remote jobs excluded, as before. Let me know if you'd now consider remote jobs too.",
+      "input": 6,
+      "cache_read": 2544,
+      "cache_write": 373,
+      "output": 244,
+      "model_calls": 2,
+      "tools": [
+        "save_preference"
+      ],
+      "seconds": 3.75,
+      "cost_usd": 0.007278,
+      "cache_hit_pct": 87.0
+    },
+    {
+      "turn": 7,
+      "session": 2,
+      "prompt": "Monday.com rejected me. Which of my applications are still active?",
+      "reply": "Sorry about Monday.com. I've marked that application as rejected.\n\nYou have one active application left: **Wix**, Backend Developer, which is at the **interview** stage.",
+      "input": 6,
+      "cache_read": 3284,
+      "cache_write": 406,
+      "output": 203,
+      "model_calls": 2,
+      "tools": [
+        "update_status",
+        "search_applications"
+      ],
+      "seconds": 3.24,
+      "cost_usd": 0.006771,
+      "cache_hit_pct": 88.9
+    }
+  ],
+  "totals": {
+    "input": 40,
+    "cache_read": 17100,
+    "cache_write": 4656,
+    "output": 1186,
+    "model_calls": 13,
+    "cost_usd": 0.050581,
+    "seconds": 23.6,
+    "cache_hit_pct": 78.5,
+    "wall_seconds": 23.8
+  },
+  "checks": [
+    {
+      "id": "two_applications_no_duplicates",
+      "passed": true,
+      "detail": "2 applications in jobs.json"
+    },
+    {
+      "id": "wix_status_interview",
+      "passed": true,
+      "detail": "status in jobs.json: interview"
+    },
+    {
+      "id": "monday_status_rejected",
+      "passed": true,
+      "detail": "status in jobs.json: rejected"
+    },
+    {
+      "id": "contradiction_overrides_old_preference",
+      "passed": true,
+      "detail": "work-mode preferences: {'work_mode': 'hybrid or full-time office (no fully remote)'}"
+    },
+    {
+      "id": "external_tool_used",
+      "passed": true,
+      "detail": "turn 4 tools: ['fetch_job_posting']"
+    },
+    {
+      "id": "memory_recalled_in_session_2",
+      "passed": true,
+      "detail": "all words found"
+    }
+  ],
+  "checks_passed": "6/6",
+  "loc": {
+    "api": {
+      "loop": 24,
+      "tools": 96,
+      "history": 39,
+      "memory": 21,
+      "context": 19,
+      "compaction": 22,
+      "caching": 14,
+      "tokens": 39,
+      "total": 274
+    },
+    "sdk": {
+      "loop": 4,
+      "tools": 33,
+      "history": 3,
+      "memory": 12,
+      "context": 2,
+      "compaction": 0,
+      "caching": 0,
+      "tokens": 19,
+      "total": 73
+    }
+  }
+}

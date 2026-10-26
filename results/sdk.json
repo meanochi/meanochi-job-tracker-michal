@@ -1,0 +1,203 @@
+{
+  "version": "sdk",
+  "scenario": "scenario.json",
+  "turns": [
+    {
+      "turn": 1,
+      "session": 1,
+      "prompt": "I applied to Wix for a Backend Developer position, and to Monday.com as a Full-Stack Junior.",
+      "reply": "I added both applications. Their status is \"applied\":\n- **Wix**: Backend Developer\n- **Monday.com**: Full-Stack Junior\n\nIf you have the job posting links, send them and I'll add them.",
+      "input": 4,
+      "cache_read": 3161,
+      "cache_write": 1162,
+      "output": 276,
+      "model_calls": 2,
+      "tools": [
+        "add_application",
+        "add_application"
+      ],
+      "cost_usd": 0.015595,
+      "seconds": 6.05,
+      "cache_hit_pct": 73.1,
+      "cost_cumulative_usd": 0.015595
+    },
+    {
+      "turn": 2,
+      "session": 1,
+      "prompt": "Important for the future: I only want hybrid jobs. No fully remote and no full-time office.",
+      "reply": "I saved your preference: hybrid jobs only, so no fully remote and no full-time office roles. When you send me a job posting, I'll check it against this.",
+      "input": 4,
+      "cache_read": 4786,
+      "cache_write": 276,
+      "output": 154,
+      "model_calls": 2,
+      "tools": [
+        "save_preference"
+      ],
+      "cost_usd": 0.006261,
+      "seconds": 5.13,
+      "cache_hit_pct": 94.5,
+      "cost_cumulative_usd": 0.021856
+    },
+    {
+      "turn": 3,
+      "session": 1,
+      "prompt": "Wix invited me to a first interview!",
+      "reply": "Congratulations! 🎉 I've moved Wix to \"interview.\" Good luck!",
+      "input": 4,
+      "cache_read": 5310,
+      "cache_write": 216,
+      "output": 109,
+      "model_calls": 2,
+      "tools": [
+        "update_status"
+      ],
+      "cost_usd": 0.004986,
+      "seconds": 5.77,
+      "cache_hit_pct": 96.0,
+      "cost_cumulative_usd": 0.026842
+    },
+    {
+      "turn": 4,
+      "session": 1,
+      "prompt": "I found this job board: https://www.python.org/jobs/ - read it and tell me in one sentence whether it looks relevant for me. Don't add anything.",
+      "reply": "It doesn't look very relevant for you, since most of the listings I could see are fully remote or full-time office jobs abroad, not hybrid ones (and the page text was cut off, so I didn't see all 21).",
+      "input": 4,
+      "cache_read": 5752,
+      "cache_write": 863,
+      "output": 171,
+      "model_calls": 2,
+      "tools": [
+        "fetch_job_posting"
+      ],
+      "cost_usd": 0.01149,
+      "seconds": 6.36,
+      "cache_hit_pct": 86.9,
+      "cost_cumulative_usd": 0.038332
+    },
+    {
+      "turn": 5,
+      "session": 2,
+      "prompt": "Remind me: what work mode do I want, and where does my Wix application stand?",
+      "reply": "- **Work mode:** Hybrid only, so no fully remote jobs and no full-time office jobs. This comes from your saved preferences.\n- **Wix (Backend Developer):** You're at the **interview** stage.",
+      "input": 4,
+      "cache_read": 3164,
+      "cache_write": 930,
+      "output": 121,
+      "model_calls": 2,
+      "tools": [
+        "search_applications"
+      ],
+      "cost_usd": 0.010637,
+      "seconds": 4.54,
+      "cache_hit_pct": 77.2,
+      "cost_cumulative_usd": 0.010637
+    },
+    {
+      "turn": 6,
+      "session": 2,
+      "prompt": "Actually, a full-time office job is fine too, not only hybrid. Please update my preference.",
+      "reply": "I've updated your work mode to **hybrid or full-time office**. I kept \"no fully remote\" from your earlier preference. If remote jobs are fine now too, tell me and I'll change it.",
+      "input": 4,
+      "cache_read": 4340,
+      "cache_write": 410,
+      "output": 257,
+      "model_calls": 2,
+      "tools": [
+        "save_preference"
+      ],
+      "cost_usd": 0.009304,
+      "seconds": 4.97,
+      "cache_hit_pct": 91.3,
+      "cost_cumulative_usd": 0.019941
+    },
+    {
+      "turn": 7,
+      "session": 2,
+      "prompt": "Monday.com rejected me. Which of my applications are still active?",
+      "reply": "I'm sorry about Monday.com. I've marked that application as rejected.\n\nYou have one active application left:\n- **Wix, Backend Developer:** at the interview stage",
+      "input": 4,
+      "cache_read": 5128,
+      "cache_write": 377,
+      "output": 169,
+      "model_calls": 2,
+      "tools": [
+        "update_status",
+        "search_applications"
+      ],
+      "cost_usd": 0.007438,
+      "seconds": 4.69,
+      "cache_hit_pct": 93.1,
+      "cost_cumulative_usd": 0.027379
+    }
+  ],
+  "totals": {
+    "input": 28,
+    "cache_read": 31641,
+    "cache_write": 4234,
+    "output": 1257,
+    "model_calls": 14,
+    "cost_usd": 0.065711,
+    "seconds": 37.51,
+    "cache_hit_pct": 88.1,
+    "wall_seconds": 41.4
+  },
+  "checks": [
+    {
+      "id": "two_applications_no_duplicates",
+      "passed": true,
+      "detail": "2 applications in jobs.json"
+    },
+    {
+      "id": "wix_status_interview",
+      "passed": true,
+      "detail": "status in jobs.json: interview"
+    },
+    {
+      "id": "monday_status_rejected",
+      "passed": true,
+      "detail": "status in jobs.json: rejected"
+    },
+    {
+      "id": "contradiction_overrides_old_preference",
+      "passed": true,
+      "detail": "work-mode preferences: {'work_mode': 'hybrid or full-time office (no fully remote)'}"
+    },
+    {
+      "id": "external_tool_used",
+      "passed": true,
+      "detail": "turn 4 tools: ['fetch_job_posting']"
+    },
+    {
+      "id": "memory_recalled_in_session_2",
+      "passed": true,
+      "detail": "all words found"
+    }
+  ],
+  "checks_passed": "6/6",
+  "loc": {
+    "api": {
+      "loop": 24,
+      "tools": 96,
+      "history": 39,
+      "memory": 21,
+      "context": 19,
+      "compaction": 22,
+      "caching": 14,
+      "tokens": 39,
+      "total": 274
+    },
+    "sdk": {
+      "loop": 4,
+      "tools": 33,
+      "history": 3,
+      "memory": 12,
+      "context": 2,
+      "compaction": 0,
+      "caching": 0,
+      "tokens": 19,
+      "total": 73
+    }
+  },
+  "note": "cost_usd per turn was corrected after the run: ResultMessage.total_cost_usd is cumulative per session, so per-turn cost = difference from the previous turn in the same session (raw value kept in cost_cumulative_usd). SDK/agent.py now does this itself."
+}
